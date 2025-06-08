@@ -5,7 +5,7 @@
 -- Dumped from database version 17.5
 -- Dumped by pg_dump version 17.5
 
--- Started on 2025-06-07 21:14:11
+-- Started on 2025-06-08 14:43:26
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -55,7 +55,7 @@ CREATE SEQUENCE public.cliente_codigo_seq
 ALTER SEQUENCE public.cliente_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 4890 (class 0 OID 0)
+-- TOC entry 4889 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: cliente_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -93,7 +93,7 @@ CREATE SEQUENCE public.cor_codigo_seq
 ALTER SEQUENCE public.cor_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 4891 (class 0 OID 0)
+-- TOC entry 4890 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: cor_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -131,7 +131,7 @@ CREATE SEQUENCE public.modelo_codigo_seq
 ALTER SEQUENCE public.modelo_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 4892 (class 0 OID 0)
+-- TOC entry 4891 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: modelo_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -176,7 +176,7 @@ CREATE SEQUENCE public.moto_codigo_seq
 ALTER SEQUENCE public.moto_codigo_seq OWNER TO postgres;
 
 --
--- TOC entry 4893 (class 0 OID 0)
+-- TOC entry 4892 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: moto_codigo_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -217,82 +217,102 @@ ALTER TABLE ONLY public.moto ALTER COLUMN codigo SET DEFAULT nextval('public.mot
 
 
 --
--- TOC entry 4878 (class 0 OID 16461)
+-- TOC entry 4877 (class 0 OID 16461)
 -- Dependencies: 218
 -- Data for Name: cliente; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.cliente (codigo, nome, cpf, telefone) FROM stdin;
-5	Camila	4900079022	54996989117
+9	Ana Maria	12365874122	54998521477
 \.
 
 
 --
--- TOC entry 4880 (class 0 OID 16470)
+-- TOC entry 4879 (class 0 OID 16470)
 -- Dependencies: 220
 -- Data for Name: cor; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.cor (codigo, nome) FROM stdin;
-3	amarelo
+7	Azul
+3	Amarelo
+8	Vermelho
+9	Preto
+10	Branco
 \.
 
 
 --
--- TOC entry 4882 (class 0 OID 16479)
+-- TOC entry 4881 (class 0 OID 16479)
 -- Dependencies: 222
 -- Data for Name: modelo; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.modelo (codigo, nome) FROM stdin;
 1	BIZ 125 ES
+5	ADV 160
+6	PCX 160 CBS
+7	PCX 160 DLX ABS
+9	BIZ 125 EX
+10	CG 160 CARGO
+11	CG 160 FAN
+12	CG 160 TITAN
+13	NXR 160 BROS CBS
+14	NXR 160 BROS ABS
+15	CRF 250F
+16	XRE 190
+4	ELITE 125
 \.
 
 
 --
--- TOC entry 4884 (class 0 OID 16486)
+-- TOC entry 4883 (class 0 OID 16486)
 -- Dependencies: 224
 -- Data for Name: moto; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.moto (codigo, cod_cor, cod_modelo, status, data_fabricacao, tipo, placa) FROM stdin;
+6	7	1	1	2025-06-03	1	\N
+12	10	16	1	2025-06-02	1	\N
+13	10	1	1	2022-10-08	2	\N
+7	7	1	1	2025-06-03	2	abcd   
 \.
 
 
 --
--- TOC entry 4894 (class 0 OID 0)
+-- TOC entry 4893 (class 0 OID 0)
 -- Dependencies: 217
 -- Name: cliente_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.cliente_codigo_seq', 7, true);
+SELECT pg_catalog.setval('public.cliente_codigo_seq', 9, true);
 
 
 --
--- TOC entry 4895 (class 0 OID 0)
+-- TOC entry 4894 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: cor_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.cor_codigo_seq', 5, true);
+SELECT pg_catalog.setval('public.cor_codigo_seq', 10, true);
 
 
 --
--- TOC entry 4896 (class 0 OID 0)
+-- TOC entry 4895 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: modelo_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.modelo_codigo_seq', 2, true);
+SELECT pg_catalog.setval('public.modelo_codigo_seq', 16, true);
 
 
 --
--- TOC entry 4897 (class 0 OID 0)
+-- TOC entry 4896 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: moto_codigo_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.moto_codigo_seq', 1, true);
+SELECT pg_catalog.setval('public.moto_codigo_seq', 14, true);
 
 
 --
@@ -311,15 +331,6 @@ ALTER TABLE ONLY public.cliente
 
 ALTER TABLE ONLY public.cor
     ADD CONSTRAINT cor_nome_key UNIQUE (nome);
-
-
---
--- TOC entry 4727 (class 2606 OID 16495)
--- Name: moto moto_placa_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.moto
-    ADD CONSTRAINT moto_placa_key UNIQUE (placa);
 
 
 --
@@ -350,7 +361,7 @@ ALTER TABLE ONLY public.modelo
 
 
 --
--- TOC entry 4729 (class 2606 OID 16493)
+-- TOC entry 4728 (class 2606 OID 16493)
 -- Name: moto pk_moto; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -359,7 +370,15 @@ ALTER TABLE ONLY public.moto
 
 
 --
--- TOC entry 4730 (class 2606 OID 16496)
+-- TOC entry 4726 (class 1259 OID 16508)
+-- Name: idx_placa_unica; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_placa_unica ON public.moto USING btree (placa) WHERE (placa IS NOT NULL);
+
+
+--
+-- TOC entry 4729 (class 2606 OID 16496)
 -- Name: moto fk_moto_cor; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -368,7 +387,7 @@ ALTER TABLE ONLY public.moto
 
 
 --
--- TOC entry 4731 (class 2606 OID 16501)
+-- TOC entry 4730 (class 2606 OID 16501)
 -- Name: moto fk_moto_modelo; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -376,7 +395,7 @@ ALTER TABLE ONLY public.moto
     ADD CONSTRAINT fk_moto_modelo FOREIGN KEY (cod_modelo) REFERENCES public.modelo(codigo);
 
 
--- Completed on 2025-06-07 21:14:13
+-- Completed on 2025-06-08 14:43:27
 
 --
 -- PostgreSQL database dump complete

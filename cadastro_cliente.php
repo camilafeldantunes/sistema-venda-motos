@@ -40,7 +40,7 @@
 
 
  // Buscar todos os clientes cadastrados
-$sql = "SELECT * FROM cliente";
+$sql = "SELECT * FROM cliente ORDER BY nome";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $clientes = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -32,7 +32,7 @@
 
 
  // Buscar todos as cores cadastradas
-$sql = "SELECT * FROM modelo";
+$sql = "SELECT * FROM modelo ORDER BY nome";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $modelos = $stmt->fetchAll(PDO::FETCH_ASSOC);

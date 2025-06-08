@@ -7,7 +7,7 @@ try {
   CASE mt.tipo WHEN 1 THEN 'Nova' WHEN 2 THEN 'Usada' END AS tipo_nome, mt.placa  
     FROM cor c 
     JOIN moto mt ON mt.cod_cor = c.codigo 
-    JOIN modelo md ON mt.cod_modelo = md.codigo ORDER BY md.nome");
+    JOIN modelo md ON mt.cod_modelo = md.codigo ORDER BY md.nome, c.nome");
     $motos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($motos);
 } catch (PDOException $e) {

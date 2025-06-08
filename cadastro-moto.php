@@ -15,7 +15,7 @@ $modelos = $stmtModelos->fetchAll(PDO::FETCH_ASSOC);
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cor_codigo'], $_POST["modelo_codigo"], $_POST["status"], $_POST["data"], $_POST["tipo"], $_POST["placa"])) {
     $cor_codigo = $_POST['cor_codigo'];
     $modelo_codigo = $_POST['modelo_codigo'];
-    $placa = $_POST['placa'];
+    $placa = empty($_POST['placa']) ? NULL : $_POST['placa'];
     $status = $_POST['status'];
     $data = $_POST['data'];
     $tipo = $_POST['tipo'];
@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cor_codigo'], $_POST["
             $stmt->execute();
         } catch (PDOException $e) {
             if ($e->getCode() == '23505') {
-                echo "<script>alert('Erro: Cor já cadastrado.'); window.history.back();</script>";
+                echo "<script>alert('Erro: Placa já cadastrada.'); window.history.back();</script>";
                 exit;
             } else {
                 throw $e;
@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cor_codigo'], $_POST["
 $sql = "SELECT mt.codigo, md.nome AS modelo_nome, c.nome AS cor_nome, mt.status, mt.data_fabricacao, mt.tipo, mt.placa  
 FROM cor c 
 JOIN moto mt ON mt.cod_cor = c.codigo 
-JOIN modelo md ON mt.cod_modelo = md.codigo";
+JOIN modelo md ON mt.cod_modelo = md.codigo ORDER BY md.nome, c.nome";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $motos = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -203,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deletar_id'])) {
   <form action="cadastro-moto.php" method="POST">
     <div class="select-cor">
       <select name="cor_codigo" required>
-        <option value="">Selecione o modelo</option>
+        <option value="">Selecione a cor</option>
         <?php foreach ($cores as $cor): ?>
           <option value="<?= $cor['codigo'] ?>"><?= htmlspecialchars($cor['nome']) ?></option>
         <?php endforeach; ?>
