@@ -1,0 +1,139 @@
+<!-- tela-principal.html -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Tela Principal</title>
+
+  <style>
+    /* Estilo do carrossel */
+    .carousel {
+      position: relative;
+      max-width: 400px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .carousel-images {
+      display: flex;
+      transition: transform 0.5s ease;
+      width: 100%; /* 3 imagens */
+    }
+
+    .carousel-images img {
+      width: 100%;
+      object-fit: cover;
+    }
+
+
+
+.carousel-images img {
+  flex: 0 0 100%;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+      font-size: 24px;
+      z-index: 1;
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    /* Estilo do corpo da página */
+    body {
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      background-color: #e6e6e6;
+      padding: 10px;
+    }
+
+    /* container dos botões */
+    .container {
+      width: 400px;
+      margin: auto;
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    /* Estilo do título */
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    /* Estilo dos botões de menu */
+    .menu-button {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      background-color: #E53935;
+      color: white;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .menu-button:hover {
+      background-color: #C62828;
+    }
+  </style>
+</head>
+
+<body>
+
+  <img src="logo_laurindo.png" alt="Logo da empresa" width="100" height="auto">
+
+  <!-- Carrossel -->
+  <div class="carousel">
+    <div class="carousel-images">
+      <img src="imagem_um.png" alt="Imagem 1">
+      <img src="imagem_dois.png" alt="Imagem 2">
+      <img src="imagem_tres.png" alt="Imagem 3">
+    </div>
+    <button class="prev" onclick="mudarSlide(-1)">❮</button>
+    <button class="next" onclick="mudarSlide(1)">❯</button>
+  </div>
+
+  <div class="container">
+    <h2>Menu</h2>
+    <button class="menu-button" onclick="location.href='cadastro.php'">Cadastrar ou Logar Funcionário</button>
+    <button class="menu-button" onclick="location.href='cadastro_cliente.php'">Cadastrar Cliente</button>
+    <button class="menu-button" onclick="location.href='cadastro-venda.php'">Cadastrar Venda</button>
+    <button class="menu-button" onclick="location.href='cadastro-moto.php'">Cadastrar Moto</button>
+    <button class="menu-button" onclick="location.href='cadastro-revisao.php'">Cadastrar Revisão</button>
+  </div>
+
+ 
+
+  <!-- Script do carrossel -->
+  <script>
+    let slideIndex = 0;
+
+    function mudarSlide(direcao) {
+      const slides = document.querySelector('.carousel-images');
+      const totalSlides = slides.children.length;
+      slideIndex = (slideIndex + direcao + totalSlides) % totalSlides;
+      slides.style.transform = `translateX(-${slideIndex * 100}%)`;
+    }
+  </script>
+
+</body>
+</html>
+
