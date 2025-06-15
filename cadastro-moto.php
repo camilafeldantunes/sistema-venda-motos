@@ -12,7 +12,7 @@ $stmtModelos = $pdo->query($sqlModelos);
 $modelos = $stmtModelos->fetchAll(PDO::FETCH_ASSOC);
 
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cor_codigo'], $_POST["modelo_codigo"], $_POST["status"], $_POST["data"], $_POST["tipo"], $_POST["placa"])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cor_codigo'], $_POST['modelo_codigo'], $_POST['status'], $_POST['data'], $_POST['tipo'], $_POST['placa'])) {
     $cor_codigo = $_POST['cor_codigo'];
     $modelo_codigo = $_POST['modelo_codigo'];
     $placa = empty($_POST['placa']) ? NULL : $_POST['placa'];

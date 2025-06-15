@@ -1,5 +1,4 @@
 <!-- tela-principal.html -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -7,6 +6,30 @@
   <title>Tela Principal</title>
 
   <style>
+    /* Estilo específico do botão do cabeçalho */
+    .top-button {
+      /* Não precisa redefinir tudo aqui se o global já cobre */
+      margin: 0;
+    }
+
+    .top-button {
+      background-color: #E53935;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .top-button:hover {
+      background-color: #C62828;
+    }
+
+    
+
     /* Estilo do carrossel */
     .carousel {
       position: relative;
@@ -52,13 +75,27 @@
     .prev { left: 10px; }
     .next { right: 10px; }
 
-    /* Estilo do corpo da página */
+
     body {
       font-family: "Segoe UI", Tahoma, sans-serif;
-      background-color: #e6e6e6;
-      padding: 10px;
+      background-color: #E5E5E5;
+      margin: 0;
+      padding: 0;
     }
 
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      height: 60px;
+      width: auto;
+    }
     /* container dos botões */
     .container {
       width: 400px;
@@ -73,6 +110,11 @@
     /* Estilo do título */
     h2 {
       margin-bottom: 20px;
+    }
+
+    footer{
+      background-color: #E5E5E5;
+      padding: 20px;
     }
 
     /* Estilo dos botões de menu */
@@ -97,8 +139,13 @@
 </head>
 
 <body>
+   
+  <header>
+    <button class="top-button" onclick="location.href='tela-de-login.html'">Sair</button>
+    <img src="logo_laurindo.png" alt="Logo da empresa" class="logo">
+  </header>
 
-  <img src="logo_laurindo.png" alt="Logo da empresa" width="100" height="auto">
+  
 
   <!-- Carrossel -->
   <div class="carousel">
@@ -113,7 +160,7 @@
 
   <div class="container">
     <h2>Menu</h2>
-    <button class="menu-button" onclick="location.href='cadastro.php'">Cadastrar ou Logar Funcionário</button>
+    <button class="menu-button" onclick="location.href='cadastro.php'">Cadastrar Funcionário</button>
     <button class="menu-button" onclick="location.href='cadastro_cliente.php'">Cadastrar Cliente</button>
     <button class="menu-button" onclick="location.href='cadastro-venda.php'">Cadastrar Venda</button>
     <button class="menu-button" onclick="location.href='cadastro-moto.php'">Cadastrar Moto</button>
@@ -135,5 +182,10 @@
   </script>
 
 </body>
+<footer>
+  <div class="rodape">
+
+  </div>
+</footer>
 </html>
 
