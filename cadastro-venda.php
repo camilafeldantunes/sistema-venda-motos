@@ -34,10 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cod_cliente'], $_POST[
         
         $id = $_POST['alterar_id'];
 
-        $sql = "UPDATE venda SET cod_cliente = :cod_cliente, cod_funcionario = :cod_funcionario, cod_moto = :cod_moto, data_venda = :data_venda, forma_pagamento = :forma_pagamento WHERE codigo = :id";
+        $sql = "UPDATE venda SET cod_cliente = :cod_cliente, cod_moto = :cod_moto, data_venda = :data_venda, forma_pagamento = :forma_pagamento WHERE codigo = :id";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':cod_cliente', $cod_cliente, PDO::PARAM_INT);
-        $stmt->bindParam(':cod_funcionario', $cod_funcionario, PDO::PARAM_INT);
+        //$stmt->bindParam(':cod_funcionario', $cod_funcionario, PDO::PARAM_INT);
         $stmt->bindParam(':cod_moto', $cod_moto, PDO::PARAM_INT);
         $stmt->bindParam(':data_venda', $data_venda);
         $stmt->bindParam(':forma_pagamento', $forma_pagamento, PDO::PARAM_INT);
@@ -258,6 +258,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deletar_id'])) {
 
  <div class="tabela-container">
     <h2>Vendas Cadastradas</h2>
+    <div id="divBusca">
+    <input type="text" id="txtBusca" placeholder="Buscar..."/>
+     <button id="btnBusca">Buscar</button>
+  </div>
     <table id="tabela-vendas">
       <thead>
         <tr style="background-color: #f2f2f2;">
@@ -398,6 +402,34 @@ function atualizarLista() {
     form.submit();
   }
 }
+
+document.getElementById('btnBusca').addEventListener('click', function () {
+  const termoBusca = document.getElementById('txtBusca').value.toLowerCase();
+  const linhas = document.querySelectorAll('#tabela-vendas tbody tr');
+
+  linhas.forEach(linha => {
+    const cliente = linha.cells[0].innerText.toLowerCase();
+    const moto = linha.cells[1].innerText.toLowerCase();
+    const vendedor = linha.cells[2].innerText.toLowerCase();
+    const dataVenda = linha.cells[3].innerText.toLowerCase();
+    const pagamento = linha.cells[4].innerText.toLowerCase();
+
+    if (
+      cliente.includes(termoBusca) ||
+      moto.includes(termoBusca) ||
+      vendedor.includes(termoBusca) ||
+      dataVenda.includes(termoBusca) ||
+      pagamento.includes(termoBusca)
+    ) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
+  });
+});
+document.getElementById('txtBusca').addEventListener('input', function () {
+  document.getElementById('btnBusca').click();
+});
   </script>
 
 </body>

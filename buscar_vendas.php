@@ -11,7 +11,7 @@ try {
   JOIN venda v ON v.cod_moto = m.codigo
   JOIN funcionario f ON v.cod_funcionario = f.codigo
   JOIN cliente cl ON v.cod_cliente = cl.codigo
-  WHERE m.status = 1
+  
   ORDER BY cl.nome");
     $vendas = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($vendas);

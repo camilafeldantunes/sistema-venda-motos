@@ -184,6 +184,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deletar_id'])) {
   <!-- Tabela com clientes-->
   <div class="tabela-container">
     <h2>Cores Cadastradas</h2>
+     <div id="divBusca">
+      <input type="text" id="txtBusca" placeholder="Buscar..."/>
+     <button id="btnBusca">Buscar</button>
+      </div>
     <table id="tabela-cores">
       <thead>
         <tr style="background-color: #f2f2f2;">
@@ -288,13 +292,26 @@ function atualizarLista() {
       console.error(erro);
     });
 }
+document.getElementById('btnBusca').addEventListener('click', function () {
+  const termoBusca = document.getElementById('txtBusca').value.toLowerCase();
+  const linhas = document.querySelectorAll('#tabela-cores tbody tr');
+
+  linhas.forEach(linha => {
+    const nome = linha.cells[0].innerText.toLowerCase();
+    if (
+      nome.includes(termoBusca) 
+
+    ) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
+  });
+});
+document.getElementById('txtBusca').addEventListener('input', function () {
+  document.getElementById('btnBusca').click();
+});
 </script>
-
-
-</body>
-</html>
-
-
 
 
 </body>

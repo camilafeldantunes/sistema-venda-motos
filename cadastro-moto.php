@@ -246,6 +246,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deletar_id'])) {
 
  <div class="tabela-container">
     <h2>Motos Cadastradas</h2>
+    <div id="divBusca">
+    <input type="text" id="txtBusca" placeholder="Buscar..."/>
+     <button id="btnBusca">Buscar</button>
+      </div>
     <table id="tabela-motos">
       <thead>
         <tr style="background-color: #f2f2f2;">
@@ -389,6 +393,34 @@ function atualizarLista() {
     form.submit();
   }
 }
+
+document.getElementById('btnBusca').addEventListener('click', function () {
+  const termoBusca = document.getElementById('txtBusca').value.toLowerCase();
+  const linhas = document.querySelectorAll('#tabela-motos tbody tr');
+
+  linhas.forEach(linha => {
+    const modelo = linha.cells[0].innerText.toLowerCase();
+    const cor = linha.cells[1].innerText.toLowerCase();
+    const dataFabricacao = linha.cells[2].innerText.toLowerCase();
+    const status = linha.cells[3].innerText.toLowerCase();
+    const tipo = linha.cells[4].innerText.toLowerCase();
+
+    if (
+      modelo.includes(termoBusca) ||
+      cor.includes(termoBusca) ||
+      dataFabricacao.includes(termoBusca) ||
+      status.includes(termoBusca) ||
+      tipo.includes(termoBusca)
+    ) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
+  });
+});
+document.getElementById('txtBusca').addEventListener('input', function () {
+  document.getElementById('btnBusca').click();
+});
   </script>
 
 </body>

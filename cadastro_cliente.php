@@ -169,6 +169,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deletar_id'])) {
       background-color: #f9f9f9;
       cursor: pointer;
     }
+
+
   </style>
 </head>
 <body>
@@ -197,6 +199,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['deletar_id'])) {
   <!-- Tabela com clientes-->
   <div class="tabela-container">
     <h2>Clientes Cadastrados</h2>
+    <div id="divBusca">
+    <input type="text" id="txtBusca" placeholder="Buscar..."/>
+     <button id="btnBusca">Buscar</button>
+      </div>
     <table id="tabela-clientes">
       <thead>
         <tr style="background-color: #f2f2f2;">
@@ -310,6 +316,30 @@ function atualizarLista() {
       console.error(erro);
     });
 }
+
+document.getElementById('btnBusca').addEventListener('click', function () {
+  const termoBusca = document.getElementById('txtBusca').value.toLowerCase();
+  const linhas = document.querySelectorAll('#tabela-clientes tbody tr');
+
+  linhas.forEach(linha => {
+    const nome = linha.cells[0].innerText.toLowerCase();
+    const cpf = linha.cells[1].innerText.toLowerCase();
+    const telefone = linha.cells[2].innerText.toLowerCase();
+
+    if (
+      nome.includes(termoBusca) ||
+      cpf.includes(termoBusca) ||
+      telefone.includes(termoBusca)
+    ) {
+      linha.style.display = '';
+    } else {
+      linha.style.display = 'none';
+    }
+  });
+});
+document.getElementById('txtBusca').addEventListener('input', function () {
+  document.getElementById('btnBusca').click();
+});
 </script>
 
 
